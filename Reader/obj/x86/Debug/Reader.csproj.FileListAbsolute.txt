@@ -1,0 +1,6 @@
+C:\RFID-RaceManager-master\src\RFID-RaceManager\Reader\bin\x86\Debug\Reader.dll
+C:\RFID-RaceManager-master\src\RFID-RaceManager\Reader\bin\x86\Debug\Reader.pdb
+C:\RFID-RaceManager-master\src\RFID-RaceManager\Reader\obj\x86\Debug\Reader.csprojAssemblyReference.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\Reader\obj\x86\Debug\Reader.csproj.CoreCompileInputs.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\Reader\obj\x86\Debug\Reader.dll
+C:\RFID-RaceManager-master\src\RFID-RaceManager\Reader\obj\x86\Debug\Reader.pdb

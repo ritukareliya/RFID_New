@@ -1,0 +1,16 @@
+C:\RFID-RaceManager-master\temp\Resources\start.wav
+C:\RFID-RaceManager-master\temp\Resources\tag_pass.wav
+C:\RFID-RaceManager-master\temp\races.db
+C:\RFID-RaceManager-master\temp\RaceManager.exe.config
+C:\RFID-RaceManager-master\temp\RaceManager.exe
+C:\RFID-RaceManager-master\temp\RaceManager.pdb
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.csprojAssemblyReference.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.csproj.ResolveComReference.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.Form1.resources
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.MainForm.resources
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.Properties.Resources.resources
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.csproj.GenerateResource.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.csproj.CoreCompileInputs.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.UI.csproj.CopyComplete
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.exe
+C:\RFID-RaceManager-master\src\RFID-RaceManager\RaceManager.UI\obj\x86\Debug\RaceManager.pdb

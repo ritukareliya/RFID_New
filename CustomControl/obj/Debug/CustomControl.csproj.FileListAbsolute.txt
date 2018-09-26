@@ -1,0 +1,8 @@
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\bin\Debug\CustomControl.dll
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\bin\Debug\CustomControl.pdb
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\obj\Debug\CustomControl.csprojAssemblyReference.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\obj\Debug\CustomControl.dll
+C:\RFID-RaceManager-master\src\RFID-RaceManager\CustomControl\obj\Debug\CustomControl.pdb
