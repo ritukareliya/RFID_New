@@ -5472,8 +5472,19 @@ namespace RaceManager.UI
                 SQLiteCommand cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
                 cmd.ExecuteNonQuery();
                 bindingSourcePilots1.Clear();
+                clearFormText();
                 MessageBox.Show("DB has been cleared successfully", "Pilots", MessageBoxButtons.OK);
             }
+        }
+
+        public void clearFormText()
+        {
+            tbPilotTag.Text = string.Empty;
+            tbPilotName.Text = string.Empty;
+            tbPilotNickname.Text = string.Empty;
+            tbPilotTeam.Text = string.Empty;
+            tbPilotEmail.Text = string.Empty;
+            cbPilotConfirmation.Checked = false;
         }
 
         private void gvPilots_CellValueChanged(object sender, DataGridViewCellEventArgs e)
