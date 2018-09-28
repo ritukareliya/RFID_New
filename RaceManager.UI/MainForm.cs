@@ -5408,7 +5408,7 @@ namespace RaceManager.UI
         }
         #endregion
 
-        #region Pilot Management
+        #region Pilots Management
 
         List<Pilot> Pilots = new List<Pilot>();
 
@@ -5429,11 +5429,7 @@ namespace RaceManager.UI
             string sqlQuery = "insert into Pilots (Name, NickName, Team, Email, Confirmation, TagID) values ('" + pilot.Name + "','" + pilot.Nickname + "','" + pilot.Team + "','" + pilot.Email + "','" + pilot.isChecked + "', '" + pilot.Tag + "' )";
             SQLiteCommand cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
             cmd.ExecuteNonQuery();
-
-            string lastRowIdQuery = @"select last_insert_rowid()";
-            cmd.CommandText = lastRowIdQuery;
-            int lastId = Convert.ToInt32(cmd.ExecuteScalar());
-            pilot.Id = lastId;
+            pilot.Id = Convert.ToInt32(getLastInsertedId(cmd));
 
             bindingSourcePilots1.DataSource = Pilots;
             bindingSourcePilots1.ResetBindings(false);
@@ -5468,9 +5464,22 @@ namespace RaceManager.UI
             if (MessageBox.Show("Do you really want to clear all DB?", "Pilots", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 database objDatabase = new database();
-                string sqlQuery = "Delete from Pilots";
-                SQLiteCommand cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
+                SQLiteCommand cmd;
+                cmd = new SQLiteCommand("Delete from Pilots", objDatabase.get_SQLiteConnection());
                 cmd.ExecuteNonQuery();
+
+                cmd = new SQLiteCommand("Delete from LapsInfos", objDatabase.get_SQLiteConnection());
+                cmd.ExecuteNonQuery();
+
+                cmd = new SQLiteCommand("Delete from RaceEvents", objDatabase.get_SQLiteConnection());
+                cmd.ExecuteNonQuery();
+
+                cmd = new SQLiteCommand("Delete from Groups", objDatabase.get_SQLiteConnection());
+                cmd.ExecuteNonQuery();
+
+                cmd = new SQLiteCommand("Delete from Races", objDatabase.get_SQLiteConnection());
+                cmd.ExecuteNonQuery();
+
                 bindingSourcePilots1.Clear();
                 clearFormText();
                 MessageBox.Show("DB has been cleared successfully", "Pilots", MessageBoxButtons.OK);
@@ -5517,7 +5526,6 @@ namespace RaceManager.UI
         #endregion
 
         #region Round Management
-
 
         private void btnAddPilotsToGroups_Click(object sender, EventArgs e)
         {
@@ -5945,9 +5953,63 @@ namespace RaceManager.UI
         }
         #endregion
 
-        private void btnRaceSave_Click(object sender, EventArgs e)
+        private void btnRaceSave_Click(object sender, EventArgs e) // Confirm And Save Button
         {
+            database objDatabase = new database();
+            string sqlQuery;
+            SQLiteCommand cmd;
 
+            // Insert into RACES table
+            sqlQuery = "insert into Races (Name, Location, Date, NumberOfLaps, NumberOfQualRounds) values ('" + Convert.ToString(_race.Name) + "' , '" + Convert.ToString(_race.Location) + "' , '" + Convert.ToString(_race.Date) + "', '" + nudNumOfLaps.Value + "', '" + nudNumberOfQualRounds.Value + "')";
+            cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
+            cmd.ExecuteNonQuery();
+            _race.Id = Convert.ToInt32(getLastInsertedId(cmd));
+
+            foreach (var group in _race.Groups)
+            {
+                // Insert into GROUP table and Update GroupId into RaceEvents Collection
+                sqlQuery = "insert into Groups (RaceId, Name) values (" + Convert.ToInt32(_race.Id) + ", '" + Convert.ToString(group.Name) + "')";
+                cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
+                cmd.ExecuteNonQuery();
+                group.Id = Convert.ToInt32(getLastInsertedId(cmd));
+
+                foreach (var raceEvent in _race.RaceEvents)
+                {
+                    // Insert into RACEEVENTS table
+                    if (group.Name == raceEvent.Group.Name)
+                    {
+                        sqlQuery = "insert into RaceEvents (RaceId, Name, Group_Id) values (" + Convert.ToInt32(_race.Id) + ", '" + Convert.ToString(raceEvent.Round) + "', " + group.Id + "  )";
+                        cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
+                        cmd.ExecuteNonQuery();
+                        raceEvent.Id = Convert.ToInt32(getLastInsertedId(cmd));
+
+                        foreach (var laps in raceEvent.Laps)
+                        {
+                            // Insert into LAPSINFOS table
+                            sqlQuery = "insert into LapsInfos (PilotId, PilotName, RaceEventId, OrderNumber, RankNumber, Epc, Pc, IdCount, Rssi, CarrFrequency, Lap1, Lap2, Lap3," +
+                                "Lap4, Lap5, Lap6, AvgLapTime, BestLapTime)" +
+                            " values (" + Convert.ToInt32(laps.PilotId) + ", '" + Convert.ToString(laps.PilotName) + "', " + Convert.ToInt32(raceEvent.Id) + ", " +
+                            " " + laps.OrderNumber + ", " + laps.RankNumber + ", '" + laps.Epc + "', '" + laps.Pc + "', " + laps.IdCount + ", '" + laps.Rssi + "'" +
+                            ", " + Convert.ToDecimal(laps.CarrFrequency) + ", '" + Convert.ToString(laps.Lap1) + "', '" + Convert.ToString(laps.Lap2) + "', '" + Convert.ToString(laps.Lap3) + "'" +
+                            ", '" + Convert.ToString(laps.Lap4) + "', '" + Convert.ToString(laps.Lap5) + "', '" + Convert.ToString(laps.Lap6) + "'" +
+                            ",'" + Convert.ToInt32(laps.AvgLapTime) + "', '" + Convert.ToInt32(laps.BestLapTimeString) + "' )";
+                            cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+        }
+
+        public int getLastInsertedId(SQLiteCommand cmd)
+        {
+            //database objDatabase = new database();
+            //SQLiteCommand cmd;
+            string lastRowIdQuery;
+            lastRowIdQuery = @"select last_insert_rowid()";
+            //cmd = new SQLiteCommand(objDatabase.get_SQLiteConnection());
+            cmd.CommandText = lastRowIdQuery;
+            return Convert.ToInt32(cmd.ExecuteScalar());
         }
 
         private void gvRace_CellEndEdit(object sender, DataGridViewCellEventArgs e)
