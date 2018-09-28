@@ -5992,7 +5992,7 @@ namespace RaceManager.UI
                             " " + laps.OrderNumber + ", " + laps.RankNumber + ", '" + laps.Epc + "', '" + laps.Pc + "', " + laps.IdCount + ", '" + laps.Rssi + "'" +
                             ", " + Convert.ToDecimal(laps.CarrFrequency) + ", '" + Convert.ToString(laps.Lap1) + "', '" + Convert.ToString(laps.Lap2) + "', '" + Convert.ToString(laps.Lap3) + "'" +
                             ", '" + Convert.ToString(laps.Lap4) + "', '" + Convert.ToString(laps.Lap5) + "', '" + Convert.ToString(laps.Lap6) + "'" +
-                            ",'" + Convert.ToInt32(laps.AvgLapTime) + "', '" + Convert.ToInt32(laps.BestLapTimeString) + "' )";
+                            ",'" + Convert.ToString(laps.AvgLapTime) + "', '" + Convert.ToString(laps.BestLapTimeString) + "' )";
                             cmd = new SQLiteCommand(sqlQuery, objDatabase.get_SQLiteConnection());
                             cmd.ExecuteNonQuery();
                         }
