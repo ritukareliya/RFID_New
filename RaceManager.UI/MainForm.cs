@@ -6133,7 +6133,7 @@ namespace RaceManager.UI
                 foreach (var laps in raceEvent.Laps)
                 {
                     // Insert into LapsInfos table
-                    if (laps.Id == 0)
+                    if (laps.Id == 0 && Convert.ToString(laps.Lap1) != null)
                     {
                         sqlQuery = "insert into LapsInfos (PilotId, PilotName, RaceEventId, OrderNumber, RankNumber, Epc, Pc, IdCount, Rssi, CarrFrequency, Lap1, Lap2, Lap3," +
                         "Lap4, Lap5, Lap6, AvgLapTime, BestLapTime, GroupId)" +
